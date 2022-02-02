@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import colors from "colors";
 import userRoutes from "./routes/userRoutes.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 dotenv.config();
 
 const app = express();
@@ -15,7 +16,11 @@ app.get("/", (req, res) => {
   res.send("API Running");
 });
 
+// User Routes
 app.use("/api/users", userRoutes);
+
+// Error Handler
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 
