@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import gameSchema from "./gameSchema.js";
+import bycrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -13,6 +14,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+
     // If user login with Google, use Google ID as password
   },
 
@@ -26,6 +28,12 @@ const userSchema = new mongoose.Schema({
   },
   gameHistory: [gameSchema],
 });
+
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bycrypt.compare(enteredPassword, this.password);
+};
+
+userSchema.pre("save", async function (next) {});
 
 const User = mongoose.model("User", userSchema);
 

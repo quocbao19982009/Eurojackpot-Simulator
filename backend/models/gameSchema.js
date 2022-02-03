@@ -9,7 +9,10 @@ const gameSchema = new mongoose.Schema(
   {
     playLottery: [lotterySchema],
     resultLottery: lotterySchema,
-    profit: Number,
+    win: Number,
+    lotteryCost: Number,
+    // CalculatedWin(winMoney)  - playLotter.length * 2
+    // Or use Win
   },
   {
     timestamps: true,
