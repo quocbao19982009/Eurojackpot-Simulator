@@ -1,0 +1,51 @@
+.numberBox {
+  display: flex;
+  flex-direction: column;
+  margin: 0 1rem 2rem;
+}
+
+.label {
+  align-items: center;
+  display: flex;
+  font-weight: 700;
+  line-height: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.numberGird {
+  display: grid;
+  grid-gap: 0.25rem;
+  font-weight: 600;
+  width: 100%;
+  grid-auto-rows: 2rem;
+  grid-template-columns: repeat(10, 2rem);
+}
+
+.number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  transition: border-radius 0.2s ease-in-out, background-color 0.1s ease-in-out;
+  background-color: rgb(253, 242, 255);
+}
+
+.number:hover {
+  cursor: pointer;
+  box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 24%);
+  background-color: rgb(238, 202, 245);
+}
+
+.active {
+  background-color: rgb(114, 0, 140) !important;
+  color: #fff !important;
+  cursor: pointer;
+  pointer-events: all !important;
+}
+
+.disable {
+  cursor: default;
+  background-color: #ebeff5;
+  pointer-events: none;
+  transition: none;
+}
