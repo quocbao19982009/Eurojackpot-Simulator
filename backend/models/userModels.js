@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-
     // If user login with Google, use Google ID as password
   },
 
@@ -33,7 +32,16 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bycrypt.compare(enteredPassword, this.password);
 };
 
-userSchema.pre("save", async function (next) {});
+// Hashing the password before save
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+    // If the password is not change then just go next
+  }
+
+  const salt = await bycrypt.genSalt(10);
+  this.password = await bycrypt.hash(this.password, salt);
+});
 
 const User = mongoose.model("User", userSchema);
 

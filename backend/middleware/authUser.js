@@ -13,7 +13,7 @@ const authUser = asyncHandler(async (req, res, next) => {
       const user = await User.findById(decoded.id).select("-password");
 
       req.user = user;
-      console.log(decoded);
+
       next();
     } catch (error) {
       console.error(error);

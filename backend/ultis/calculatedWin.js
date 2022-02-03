@@ -1,4 +1,4 @@
-const numberSelectedbyUser = [1, 2, 3, 18, 50];
+/* const numberSelectedbyUser = [1, 2, 3, 18, 50];
 const numberSelectedResult = [1, 3, 20, 23, 25];
 const starNumberSelectedbyUser = [1, 2];
 const starNumberSelectedResult = [2, 3];
@@ -12,7 +12,7 @@ const resultLottery = {
   numberSelectedResult,
   starNumberSelectedResult,
 };
-/* playerLottery: {
+playerLottery: {
 numberSelectedbyUser,
 numberSelectedResult
 }
@@ -76,6 +76,8 @@ const calculatedWin = (playerLottery, resultLottery) => {
   }
   if (winNumber === 5 && winStartNumber === 2) {
     return 33334010;
+  } else {
+    return 0;
   }
 };
 

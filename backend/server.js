@@ -4,6 +4,7 @@ import morgan from "morgan";
 import connectDB from "./config/db.js";
 import colors from "colors";
 import userRoutes from "./routes/userRoutes.js";
+import lotteryRoutes from "./routes/lotteryRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 dotenv.config();
 
@@ -23,6 +24,9 @@ app.get("/", (req, res) => {
 
 // User Routes
 app.use("/api/users", userRoutes);
+
+// Lottery Routes
+app.use("/api/lottery", lotteryRoutes);
 
 // Error Handler
 app.use(notFound);

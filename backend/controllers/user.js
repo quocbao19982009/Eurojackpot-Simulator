@@ -28,6 +28,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -53,7 +54,6 @@ const loginUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
-      headers: req.headers,
     });
   } else {
     res.status(401);
@@ -70,6 +70,11 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
   if (user) {
     res.json(user);
+  }
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
   }
 });
 

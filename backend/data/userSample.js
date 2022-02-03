@@ -11,16 +11,16 @@ const userSample = [
         playLottery: [
           {
             number: [1, 2, 3, 4, 5],
-            starNumber: [1, 2],
+            starNumber: [6, 7],
           },
-          { number: [46, 50, 28, 31, 12], starNumber: [6, 7] },
+          { number: [8, 9, 10, 11, 12], starNumber: [4, 7] },
         ],
         resultLottery: {
-          number: [12, 50, 6, 27, 5],
+          number: [1, 2, 8, 27, 5],
           starNumber: [6, 10],
         },
-        win: 0,
-        lotteryCost: -4,
+        win: 8,
+        lotteryCost: 4,
       },
     ],
   },
