@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
   bankAccount: {
     type: Number,
     default: 100,
+    min: 0,
   },
   isAdmin: {
     type: Boolean,
