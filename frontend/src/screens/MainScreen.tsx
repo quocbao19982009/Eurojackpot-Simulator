@@ -1,11 +1,11 @@
 import React from "react";
 import { Container } from "@mui/material";
-import NumberBox from "../components/NumberBox";
+import GameArea from "../components/GameArea";
 
 export const MainScreen = () => {
   return (
     <Container>
-      <NumberBox />
+      <GameArea />
     </Container>
   );
 };
