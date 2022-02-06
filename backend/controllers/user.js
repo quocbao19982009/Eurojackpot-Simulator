@@ -78,4 +78,36 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, loginUser, getUserProfile };
+const loginWithGoogle = asyncHandler(async (req, res) => {
+  const { name, email, googleID } = req.body;
+
+  const userExits = await User.findOne({ email });
+
+  if (userExits) {
+    res.status(200).json({
+      _id: userExits._id,
+      name: userExits.name,
+      email: userExits.email,
+      isAdmin: userExits.isAdmin,
+      token: generateToken(userExits._id),
+    });
+  }
+  if (!userExits) {
+    const user = await User.create({
+      name,
+      email,
+      password: googleID,
+    });
+    if (user) {
+      res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+      });
+    }
+  }
+});
+
+export { registerUser, loginUser, getUserProfile, loginWithGoogle };
