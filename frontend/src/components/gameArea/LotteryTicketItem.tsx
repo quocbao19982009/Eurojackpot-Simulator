@@ -1,6 +1,6 @@
 import { ClassNames } from "@emotion/react";
 import React from "react";
-import lotteryModel from "../models/lotteryModels";
+import lotteryModel from "../../models/lotteryModels";
 import classes from "./LotteryTicketItem.module.css";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";

@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./GameArea.module.css";
 import LotteryTicketList from "./LotteryTicketList";
-import LotterySelect from "./numberbox/LotterySelect";
+import LotterySelect from "../numberbox/LotterySelect";
 const GameArea = () => {
   return (
     <>

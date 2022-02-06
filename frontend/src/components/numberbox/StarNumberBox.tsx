@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import classes from "./NumberBox.module.css";
+import classes from "./StarNumberbox.module.css";
 
 const numberArray10 = Array.from({ length: 10 }, (_, i) => i + 1);
 
