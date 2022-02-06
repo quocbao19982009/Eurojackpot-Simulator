@@ -24,10 +24,10 @@ const registerUser = asyncHandler(async (req, res, next) => {
 
   if (user) {
     res.status(201).json({
-      _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      bankAccount: user.bankAccount,
       token: generateToken(user._id),
     });
   } else {
@@ -49,10 +49,10 @@ const loginUser = asyncHandler(async (req, res) => {
 
   if (user && matchPassword) {
     res.json({
-      _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      bankAccount: user.bankAccount,
       token: generateToken(user._id),
     });
   } else {

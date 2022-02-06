@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,16 +14,22 @@ import Typography from "@mui/material/Typography";
 import Container from "../components/layout/Container";
 import { Link } from "react-router-dom";
 import GoogleButton from "../components/GoogleButton";
+import { login } from "../actions/userAction";
+import { Password } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
 
 const LoginScreen = () => {
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    if (email.trim() !== "" && password.trim() !== "") {
+      dispatch(login(email, password));
+    }
   };
 
   return (
@@ -52,6 +59,7 @@ const LoginScreen = () => {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -62,6 +70,7 @@ const LoginScreen = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <Button
