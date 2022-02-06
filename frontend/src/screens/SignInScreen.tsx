@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "../components/layout/Container";
 import { Link } from "react-router-dom";
+import GoogleButton from "../components/GoogleButton";
 
 const LoginScreen = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -62,10 +63,7 @@ const LoginScreen = () => {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+
           <Button
             type="submit"
             fullWidth
@@ -81,6 +79,20 @@ const LoginScreen = () => {
               </LinkUI>
             </Grid>
           </Grid>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              mt: 3,
+            }}
+          >
+            <Typography component="span" variant="h6">
+              OR
+            </Typography>
+            <GoogleButton />
+          </Box>
         </Box>
       </Box>
     </>
