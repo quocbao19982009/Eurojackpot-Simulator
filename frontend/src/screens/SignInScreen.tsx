@@ -17,20 +17,33 @@ import GoogleButton from "../components/GoogleButton";
 import { login } from "../actions/userAction";
 import { Password } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { boolean } from "yup/lib/locale";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const validationSchema = yup.object({
+    email: yup
+      .string()
+      .email("Enter a valid Email")
+      .required("Email is required"),
+    password: yup.string().required("Password is required"),
+  });
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (email.trim() !== "" && password.trim() !== "") {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      const email = values.email;
+      const password = values.password;
       dispatch(login(email, password));
-    }
-  };
+    },
+  });
 
   return (
     <>
@@ -49,7 +62,7 @@ const LoginScreen = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -58,8 +71,10 @@ const LoginScreen = () => {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
-            onChange={(e) => setEmail(e.target.value)}
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
           />
           <TextField
             margin="normal"
@@ -70,7 +85,10 @@ const LoginScreen = () => {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={(e) => setPassword(e.target.value)}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
           />
 
           <Button

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,7 +12,17 @@ import Typography from "@mui/material/Typography";
 import Container from "../components/layout/Container";
 import { Link } from "react-router-dom";
 
+import { signUp } from "../actions/userAction";
+import { useDispatch } from "react-redux";
+
 const SignUpScreen = () => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+
+  const dispatch = useDispatch();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -50,6 +61,8 @@ const SignUpScreen = () => {
                 id="Name"
                 label="Name"
                 autoFocus
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </Grid>
 
@@ -61,6 +74,8 @@ const SignUpScreen = () => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -72,6 +87,8 @@ const SignUpScreen = () => {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -83,6 +100,8 @@ const SignUpScreen = () => {
                 type="password"
                 id="confirm password"
                 autoComplete="new-password"
+                value={passwordConfirm}
+                onChange={(e) => setPasswordConfirm(e.target.value)}
               />
             </Grid>
           </Grid>

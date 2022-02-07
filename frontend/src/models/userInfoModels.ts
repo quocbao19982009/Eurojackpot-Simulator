@@ -3,7 +3,6 @@ interface userInfoModel {
   email: string;
   bankAccount: number;
   isAdmin: boolean;
-
   token?: string;
 }
 

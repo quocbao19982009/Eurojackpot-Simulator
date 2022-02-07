@@ -11,12 +11,14 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo")!)
   : null;
 
+const isLogin = userInfoFromStorage ? true : false;
+
 const tokenFromStorage = localStorage.getItem("token")
   ? JSON.parse(localStorage.getItem("token")!)
   : null;
 
 const initialState: UserState = {
-  isLogin: null,
+  isLogin: isLogin,
   userInfo: userInfoFromStorage,
   token: tokenFromStorage,
 };
