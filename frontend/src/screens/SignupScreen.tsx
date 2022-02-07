@@ -15,23 +15,40 @@ import { Link } from "react-router-dom";
 import { signUp } from "../actions/userAction";
 import { useDispatch } from "react-redux";
 
-const SignUpScreen = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+import { useFormik } from "formik";
+import * as yup from "yup";
 
+const SignUpScreen = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  const validationSchema = yup.object({
+    name: yup.string().required("Name is required"),
+    email: yup
+      .string()
+      .email("Enter a valid Email")
+      .required("Email is required"),
+    password: yup.string().required("Password is required"),
+    passwordConfirm: yup
+      .string()
+      .required("Confirm Password is required")
+      .oneOf([yup.ref("password"), null], "Passwords must match"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      const name = values.name;
+      const email = values.email;
+      const password = values.password;
+      dispatch(signUp(name, email, password));
+    },
+  });
 
   return (
     <>
@@ -50,19 +67,20 @@ const SignUpScreen = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>
               <TextField
                 autoComplete="given-name"
-                name="firstName"
-                required
+                name="name"
                 fullWidth
                 id="Name"
                 label="Name"
                 autoFocus
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                error={formik.touched.name && Boolean(formik.errors.name)}
+                helperText={formik.touched.name && formik.errors.name}
               />
             </Grid>
 
@@ -74,8 +92,10 @@ const SignUpScreen = () => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
               />
             </Grid>
             <Grid item xs={12}>
@@ -87,21 +107,33 @@ const SignUpScreen = () => {
                 type="password"
                 id="password"
                 autoComplete="new-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
-                name="confirm password"
+                name="passwordConfirm"
                 label="Confirm Password"
                 type="password"
-                id="confirm password"
+                id="passwordConfirm"
                 autoComplete="new-password"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
+                value={formik.values.passwordConfirm}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.passwordConfirm &&
+                  Boolean(formik.errors.passwordConfirm)
+                }
+                helperText={
+                  formik.touched.passwordConfirm &&
+                  formik.errors.passwordConfirm
+                }
               />
             </Grid>
           </Grid>

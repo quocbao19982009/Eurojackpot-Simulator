@@ -1,4 +1,5 @@
 import { userLogin, userLogout } from "../slices/userSlice";
+import { createAlert } from "./alertAction";
 import userInfoModel from "../models/userInfoModels";
 import axios from "axios";
 
@@ -16,8 +17,8 @@ export const signUp =
       localStorage.setItem("token", JSON.stringify(data.token));
       localStorage.setItem("userInfo", JSON.stringify(data));
       dispatch(userLogin(data));
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      dispatch(createAlert(error.response.data.message));
     }
   };
 
@@ -43,7 +44,7 @@ export const login =
       );
       dispatch(userLogin(data));
     } catch (error: any) {
-      console.log(error.response.data);
+      dispatch(createAlert(error.response.data.message));
     }
   };
 
@@ -52,3 +53,28 @@ export const logout = () => (dispatch: any) => {
   localStorage.removeItem("token");
   dispatch(userLogout());
 };
+
+export const loginWithGoogle =
+  (email: string, name: string, googleID: string) => async (dispatch: any) => {
+    try {
+      const { data } = await axios.post("/api/users/googlelogin", {
+        name,
+        email,
+        googleID,
+      });
+
+      localStorage.setItem("token", JSON.stringify(data.token));
+      localStorage.setItem(
+        "userInfo",
+        JSON.stringify({
+          name: data.name,
+          email: data.email,
+          isAdmin: data.isAdmin,
+          bankAccount: data.bankAccount,
+        })
+      );
+      dispatch(userLogin(data));
+    } catch (error: any) {
+      dispatch(createAlert(error.response.data.message));
+    }
+  };

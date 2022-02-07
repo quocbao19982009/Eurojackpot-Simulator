@@ -1,5 +1,6 @@
 import React from "react";
 import { Container as ContainerUI, Box } from "@mui/material";
+import Alert from "./Alert";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
@@ -14,7 +15,10 @@ const Container = ({ children }: ContainerProps) => {
         sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
       >
         <Navbar />
+
         <ContainerUI component="main" sx={{ mt: "2rem" }}>
+          <Alert />
+
           {children}
         </ContainerUI>
         <Footer />

@@ -1,15 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import GoogleLogin, {
-  GoogleLoginResponse,
-  GoogleLoginResponseOffline,
-} from "react-google-login";
+import GoogleLogin from "react-google-login";
+import { loginWithGoogle } from "../actions/userAction";
+import { useDispatch } from "react-redux";
 
 const GoogleButton = () => {
-  const responseGoogle = (
-    response: GoogleLoginResponse | GoogleLoginResponseOffline
-  ) => {
-    console.log(response);
+  const dispatch = useDispatch();
+
+  const responseGoogle = (response: any) => {
+    const email = response.profileObj.email;
+    const name = response.profileObj.name;
+    const googleID = response.profileObj.googleId;
+    dispatch(loginWithGoogle(name, email, googleID));
   };
 
   return (
