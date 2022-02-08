@@ -28,7 +28,6 @@ const Alert = () => {
 
   return (
     <>
-      (
       <Backdrop
         sx={{ color: "#fff", zIndex: 99 }}
         open={open}
@@ -40,7 +39,6 @@ const Alert = () => {
           </AlertUI>
         ))}
       </Backdrop>
-      )
     </>
   );
 };

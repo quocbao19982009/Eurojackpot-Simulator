@@ -13,7 +13,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
 
   if (userExits) {
     res.status(400);
-    throw new Error("User already exits");
+    throw new Error("Email is used. Choose another email.");
   }
 
   const user = await User.create({
@@ -45,6 +45,10 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
 
+  if (!user) {
+    res.status(401);
+    throw new Error("Invalid Email or Password");
+  }
   const matchPassword = await user.matchPassword(password);
 
   if (user && matchPassword) {
@@ -78,8 +82,11 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Sign up with google
+// @route   POST /api/users/googlelogin
+// @access  Public
 const loginWithGoogle = asyncHandler(async (req, res) => {
-  const { name, email, googleID } = req.body;
+  const { name, email, googleID, avatar } = req.body;
 
   const userExits = await User.findOne({ email });
 
@@ -89,6 +96,7 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
       name: userExits.name,
       email: userExits.email,
       isAdmin: userExits.isAdmin,
+      avatar: userExits.avatar,
       token: generateToken(userExits._id),
     });
   }
@@ -97,6 +105,7 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
       name,
       email,
       password: googleID,
+      avatar,
     });
     if (user) {
       res.status(201).json({
@@ -104,6 +113,7 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
+        avatar: user.avatar,
         token: generateToken(user._id),
       });
     }

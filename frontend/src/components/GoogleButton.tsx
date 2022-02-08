@@ -11,7 +11,8 @@ const GoogleButton = () => {
     const email = response.profileObj.email;
     const name = response.profileObj.name;
     const googleID = response.profileObj.googleId;
-    dispatch(loginWithGoogle(name, email, googleID));
+    const avatar = response.profileObj.imageUrl;
+    dispatch(loginWithGoogle(email, name, googleID, avatar));
   };
 
   return (

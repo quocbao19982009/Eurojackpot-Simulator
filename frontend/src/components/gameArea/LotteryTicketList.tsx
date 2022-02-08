@@ -21,6 +21,7 @@ const LotteryTicketList = () => {
       </div>
       {lotteryTicket.map((ticket) => (
         <LotteryTicketItem
+          key={ticket.id}
           ticket={ticket}
           removeTicketHandler={removeTicketHandler}
         />

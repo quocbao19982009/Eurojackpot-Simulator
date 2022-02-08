@@ -5,6 +5,7 @@ interface UserState {
   isLogin: boolean | null;
   userInfo: userInfoModel | null;
   token: string | null;
+  loading: boolean;
 }
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
@@ -21,6 +22,7 @@ const initialState: UserState = {
   isLogin: isLogin,
   userInfo: userInfoFromStorage,
   token: tokenFromStorage,
+  loading: false,
 };
 
 export const userSlice = createSlice({
@@ -33,6 +35,7 @@ export const userSlice = createSlice({
         email: action.payload.email,
         bankAccount: action.payload.bankAccount,
         isAdmin: action.payload.isAdmin,
+        avatar: action.payload.avatar,
       };
       state.isLogin = true;
       state.token = action.payload.token!;
@@ -42,9 +45,16 @@ export const userSlice = createSlice({
       state.userInfo = null;
       state.isLogin = false;
     },
+    userRequestStart: (state) => {
+      state.loading = true;
+    },
+    userRequestFinish: (state) => {
+      state.loading = false;
+    },
   },
 });
 
-export const { userLogin, userLogout } = userSlice.actions;
+export const { userLogin, userLogout, userRequestStart, userRequestFinish } =
+  userSlice.actions;
 
 export default userSlice.reducer;

@@ -18,11 +18,15 @@ const LotteryTicketItem = ({
     <div className={classes.row}>
       <div className={classes.rowNumber}>
         {ticket.number.map((number) => (
-          <div className={classes.number}>{number}</div>
+          <div key={`${ticket.id}_${number}`} className={classes.number}>
+            {number}
+          </div>
         ))}
 
         {ticket.starNumber.map((number) => (
-          <div className={classes.starNumber}>{number}</div>
+          <div key={`${ticket.id}_${number}`} className={classes.starNumber}>
+            {number}
+          </div>
         ))}
       </div>
       <IconButton onClick={() => removeTicketHandler(ticket.id)}>

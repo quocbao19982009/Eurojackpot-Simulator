@@ -1,5 +1,6 @@
-import * as React from "react";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,16 +10,16 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import Container from "../components/layout/Container";
 import { Link } from "react-router-dom";
-
 import { signUp } from "../actions/userAction";
-import { useDispatch } from "react-redux";
-
+import { RootState } from "../store/store";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
 const SignUpScreen = () => {
+  const navigate = useNavigate();
+
+  const { loading, userInfo } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
   const validationSchema = yup.object({
@@ -49,6 +50,12 @@ const SignUpScreen = () => {
       dispatch(signUp(name, email, password));
     },
   });
+
+  useEffect(() => {
+    if (userInfo && !loading) {
+      navigate("/");
+    }
+  }, [userInfo, loading]);
 
   return (
     <>
@@ -142,8 +149,9 @@ const SignUpScreen = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={loading}
           >
-            Sign Up
+            {loading ? "Loading..." : "Sign Up"}
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>

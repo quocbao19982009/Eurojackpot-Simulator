@@ -18,7 +18,6 @@ const Container = ({ children }: ContainerProps) => {
 
         <ContainerUI component="main" sx={{ mt: "2rem" }}>
           <Alert />
-
           {children}
         </ContainerUI>
         <Footer />

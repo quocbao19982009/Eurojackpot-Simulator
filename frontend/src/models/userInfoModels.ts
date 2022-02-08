@@ -4,6 +4,7 @@ interface userInfoModel {
   bankAccount: number;
   isAdmin: boolean;
   token?: string;
+  avatar?: string;
 }
 
 export default userInfoModel;

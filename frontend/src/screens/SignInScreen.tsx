@@ -1,29 +1,26 @@
-import * as React from "react";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { Link as LinkUI } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import Container from "../components/layout/Container";
 import { Link } from "react-router-dom";
 import GoogleButton from "../components/GoogleButton";
 import { login } from "../actions/userAction";
-import { Password } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { boolean } from "yup/lib/locale";
+import { RootState } from "../store/store";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const { loading, userInfo } = useSelector((state: RootState) => state.user);
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -44,6 +41,12 @@ const LoginScreen = () => {
       dispatch(login(email, password));
     },
   });
+
+  useEffect(() => {
+    if (userInfo && !loading) {
+      navigate("/");
+    }
+  }, [userInfo, loading]);
 
   return (
     <>
@@ -96,9 +99,11 @@ const LoginScreen = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={loading}
           >
-            Sign In
+            {loading ? "Loading..." : "Sign In"}
           </Button>
+
           <Grid container>
             <Grid item>
               <LinkUI to="/signup" component={Link} variant="body2">
