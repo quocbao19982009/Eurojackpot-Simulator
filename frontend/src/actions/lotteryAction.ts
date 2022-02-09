@@ -1,5 +1,12 @@
-import { updateLotteryTickets } from "../slices/lotterySlice";
+import {
+  updateLotteryTickets,
+  updateLotteryHistory,
+  lotteryRequestStart,
+  lotteryRequestFinish,
+} from "../slices/lotterySlice";
 import lotteryModel from "../models/lotteryModels";
+import { createAlert } from "./alertAction";
+import axios from "axios";
 
 export const addLotteryTicket =
   (lotteryTicket: lotteryModel) => (dispatch: any, getState: any) => {
@@ -22,3 +29,25 @@ export const removeLotteryTicket =
 
     dispatch(updateLotteryTickets(updatedLotteryTickets));
   };
+
+export const getLotteryHistory = () => async (dispatch: any, getState: any) => {
+  try {
+    dispatch(lotteryRequestStart());
+
+    const token = getState().user.token;
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.get("/api/lottery/history", config);
+
+    dispatch(updateLotteryHistory(data));
+  } catch (error: any) {
+    dispatch(lotteryRequestFinish());
+    dispatch(createAlert(error.response.data.message));
+  }
+};

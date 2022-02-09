@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -17,12 +18,12 @@ import { RootState } from "../../store/store";
 import { logout } from "../../actions/userAction";
 import { stringToColor } from "../../ultis/stringToColor";
 import { string } from "yup/lib/locale";
+import { flexbox } from "@mui/system";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-
   const { userInfo, isLogin } = useSelector((state: RootState) => state.user);
-
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -48,6 +49,11 @@ const Navbar = () => {
   const logoutHandler = () => {
     setAnchorElUser(null);
     dispatch(logout());
+  };
+
+  const profileHandler = () => {
+    setAnchorElUser(null);
+    navigate("/profile");
   };
 
   const stringAvatar = (name: string) => {
@@ -146,14 +152,31 @@ const Navbar = () => {
           )}
           {isLogin && userInfo && (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Tooltip title="Profile Information">
+                <Button
+                  onClick={handleOpenUserMenu}
+                  sx={{
+                    p: 0,
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "10px",
+                  }}
+                >
                   <Avatar
                     alt={userInfo.name}
                     src={userInfo.avatar ? userInfo.avatar : ""}
                     {...stringAvatar(isLogin && userInfo.name)}
                   />
-                </IconButton>
+                  <Typography
+                    component={"span"}
+                    sx={{
+                      color: "white",
+                      marginLeft: "0.3rem",
+                    }}
+                  >
+                    {`${userInfo.bankAccount}.00 € `}
+                  </Typography>
+                </Button>
               </Tooltip>
               <Menu
                 sx={{ mt: "45px" }}
@@ -171,7 +194,7 @@ const Navbar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <MenuItem onClick={handleCloseUserMenu}>
+                <MenuItem onClick={profileHandler}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseUserMenu}>

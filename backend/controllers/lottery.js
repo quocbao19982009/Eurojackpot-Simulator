@@ -13,26 +13,6 @@ const submitLottery = asyncHandler(async (req, res) => {
 
   const { playLottery } = req.body;
   const resultLottery = generateLottery();
-  //   const resultLottery = {
-  //     number: [1, 2, 13, 14, 15],
-  //     starNumber: [1, 2],
-  //   };
-
-  /* 
-type resultLottery = {
-    number: [1,2,3,4,5],
-    starNumber: [1,2]
-}
-
-type playLottery = [
-    {number: [1,2,3,4,5],
-    starNumber: [1,2]
-    }, 
-     {number: [1,2,3,4,5],
-    starNumber: [1,2]
-    }, 
-]
-*/
   if (playLottery) {
     const arrayProfit = playLottery.map((lottery) =>
       calculatedWin(lottery, resultLottery)
@@ -66,4 +46,18 @@ type playLottery = [
   }
 });
 
-export { submitLottery };
+// @desc    get Lottery Hisotry
+// @route   GET /api/lottery/history
+// @access  Private
+const getLotteryHistory = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("Invalid credential");
+  }
+
+  const gameHistory = user.gameHistory;
+  res.json(gameHistory);
+});
+export { submitLottery, getLotteryHistory };

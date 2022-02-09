@@ -23,7 +23,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
   });
 
   if (user) {
-    res.status(201).json({
+    res.status(200).json({
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
@@ -97,6 +97,7 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
       email: userExits.email,
       isAdmin: userExits.isAdmin,
       avatar: userExits.avatar,
+      bankAccount: userExits.bankAccount,
       token: generateToken(userExits._id),
     });
   }
@@ -108,12 +109,13 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
       avatar,
     });
     if (user) {
-      res.status(201).json({
+      res.status(200).json({
         _id: user._id,
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
         avatar: user.avatar,
+        bankAccount: user.bankAccount,
         token: generateToken(user._id),
       });
     }

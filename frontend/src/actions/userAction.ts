@@ -54,7 +54,6 @@ export const login =
         })
       );
 
-      dispatch(userRequestFinish());
       dispatch(userLogin(data));
     } catch (error: any) {
       dispatch(userRequestFinish());
@@ -92,6 +91,7 @@ export const loginWithGoogle =
       );
       dispatch(userLogin(data));
     } catch (error: any) {
+      dispatch(userRequestFinish());
       dispatch(createAlert(error.response.data.message));
     }
   };

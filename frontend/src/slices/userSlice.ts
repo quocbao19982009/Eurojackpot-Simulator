@@ -39,6 +39,7 @@ export const userSlice = createSlice({
       };
       state.isLogin = true;
       state.token = action.payload.token!;
+      state.loading = false;
     },
     userLogout: (state) => {
       state.token = null;
