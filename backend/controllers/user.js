@@ -132,7 +132,7 @@ const popupAccount = asyncHandler(async (req, res) => {
   const { amount } = req.body;
 
   if (!amount) {
-    res.status(401);
+    res.status(40);
     throw new Error("A minimum amount of 10 Euros is requrired");
   }
 
@@ -151,10 +151,28 @@ const popupAccount = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    Get Popup history
+// @route   GET /api/users/transaction
+// @access  Priavte
+
+const getPopupHistory = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User is not found");
+  }
+
+  if (user) {
+    res.json(user.transaction);
+  }
+});
+
 export {
   registerUser,
   loginUser,
   getUserProfile,
   loginWithGoogle,
   popupAccount,
+  getPopupHistory,
 };

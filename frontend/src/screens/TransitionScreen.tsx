@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Paper, Typography, Button, Box } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -7,17 +7,49 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Container from "@mui/material/Container";
 import { PayPalButton } from "react-paypal-button-v2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { popupAccount } from "../actions/userAction";
+import TransactionTable from "../components/transactionHistory/TransactionTable";
+import { RootState } from "../store/store";
+import axios from "axios";
+
+interface popupHistoryInterface {
+  amount: number;
+  paidAt: string;
+  _id: string;
+}
+
 const TransitionScreen = () => {
   const dispatch = useDispatch();
   const [popupAmount, setPopupAmount] = useState<string>("10");
+  const [popupHistory, setPopupHistory] = useState<popupHistoryInterface[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const token = useSelector((state: RootState) => state.user.token);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(popupAmount);
+  const getPopupHistory = async () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.get("/api/users/transaction", config);
+
+    return data;
   };
 
+  useEffect(() => {
+    (async () => {
+      const data = await getPopupHistory();
+      setPopupHistory(data);
+      setLoading(false);
+    })();
+  }, [loading]);
+
+  console.log(popupHistory);
+  console.log(loading);
+  console.log(popupAmount);
   return (
     <div>
       <Container
@@ -48,13 +80,24 @@ const TransitionScreen = () => {
         <Container maxWidth="md" component="main">
           <Typography
             component="h3"
-            variant="h5"
+            variant="h4"
             color="text.primary"
             gutterBottom
+            textAlign="center"
           >
             Select Amount
           </Typography>
-          <Box component={"form"} onSubmit={handleSubmit}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              width: "100%",
+              flexGrow: "1",
+            }}
+            component={"form"}
+          >
             <FormControl>
               <FormLabel id="demo-radio-buttons-group-label">
                 Amount Popup
@@ -90,13 +133,49 @@ const TransitionScreen = () => {
                 />
               </RadioGroup>
             </FormControl>
-            <PayPalButton
-              amount={popupAmount}
-              // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-              onSuccess={(details: any, data: any) => {
-                dispatch(popupAccount(+popupAmount));
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+                flexGrow: "1",
               }}
-            />
+            >
+              <PayPalButton
+                amount={popupAmount}
+                // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                onSuccess={(details: any, data: any) => {
+                  dispatch(popupAccount(+popupAmount));
+                  setLoading(true);
+                }}
+              />
+            </Box>
+          </Box>
+          <Box
+            component={"div"}
+            sx={{
+              borderTop: "1px solid black",
+              padding: "1rem",
+              marginTop: "1rem",
+            }}
+          >
+            <Typography
+              component="h3"
+              variant="h4"
+              color="text.primary"
+              gutterBottom
+              textAlign="center"
+            >
+              Popup History
+            </Typography>
+            {popupHistory.length === 0 && (
+              <Typography variant="h4" component={"h4"} textAlign="center">
+                No History Transition
+              </Typography>
+            )}
+            {popupHistory.length > 0 && (
+              <TransactionTable popupHistory={popupHistory} />
+            )}
           </Box>
         </Container>
       </Paper>

@@ -125,7 +125,7 @@ export const popupAccount =
       dispatch(userRequestStart());
 
       const token = getState().user.token;
-
+      const user = getState().user.userInfo;
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -139,11 +139,19 @@ export const popupAccount =
 
       const { data } = await axios.post("/api/users/transaction", body, config);
 
-      console.log(data);
+      const updateBankAccount = data.bankAccount;
 
-      const userBankAccount = data.bankAccount;
+      dispatch(userPopupAccount(updateBankAccount));
 
-      dispatch(userPopupAccount(userBankAccount));
+      localStorage.setItem(
+        "userInfo",
+        JSON.stringify({
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          bankAccount: updateBankAccount,
+        })
+      );
     } catch (error: any) {
       dispatch(userRequestFinish());
       dispatch(createAlert(error.response.data.message));
