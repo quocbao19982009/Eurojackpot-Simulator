@@ -52,10 +52,19 @@ export const userSlice = createSlice({
     userRequestFinish: (state) => {
       state.loading = false;
     },
+    userPopupAccount: (state, action: PayloadAction<number>) => {
+      state.userInfo!.bankAccount = action.payload;
+      state.loading = false;
+    },
   },
 });
 
-export const { userLogin, userLogout, userRequestStart, userRequestFinish } =
-  userSlice.actions;
+export const {
+  userLogin,
+  userLogout,
+  userRequestStart,
+  userRequestFinish,
+  userPopupAccount,
+} = userSlice.actions;
 
 export default userSlice.reducer;

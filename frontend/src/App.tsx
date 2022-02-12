@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import Footer from "./components/layout/Footer";
 import Container from "./components/layout/Container";
 import ProfileScreen from "./screens/ProfileScreen";
+import TransitionScreen from "./screens/TransitionScreen";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="signin" element={<LoginScreen />} />
         <Route path="signup" element={<SignUpScreen />} />
         <Route path="profile" element={<ProfileScreen />} />
+        <Route path="transaction" element={<TransitionScreen />} />
       </Routes>
     </Container>
   );

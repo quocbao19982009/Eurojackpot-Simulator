@@ -23,6 +23,16 @@ const userSample = [
         lotteryCost: 4,
       },
     ],
+    transaction: [
+      {
+        amount: 10,
+        paidAt: Date.now(),
+      },
+      {
+        amount: 100,
+        paidAt: Date.now(),
+      },
+    ],
   },
   {
     name: "Cam",

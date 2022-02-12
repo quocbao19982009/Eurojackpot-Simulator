@@ -122,4 +122,39 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, loginUser, getUserProfile, loginWithGoogle };
+// @desc    Popup account with paypal
+// @route   POST /api/users/transaction
+// @access  Priavte
+
+const popupAccount = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  const { amount } = req.body;
+
+  if (!amount) {
+    res.status(401);
+    throw new Error("A minimum amount of 10 Euros is requrired");
+  }
+
+  if (user) {
+    user.bankAccount = user.bankAccount + amount;
+    user.transaction.push({
+      amount: amount,
+      paidAt: Date.now(),
+    });
+  }
+
+  const updatedUser = await user.save();
+
+  res.json({
+    bankAccount: updatedUser.bankAccount,
+  });
+});
+
+export {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  loginWithGoogle,
+  popupAccount,
+};

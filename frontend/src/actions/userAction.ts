@@ -3,6 +3,7 @@ import {
   userLogout,
   userRequestStart,
   userRequestFinish,
+  userPopupAccount,
 } from "../slices/userSlice";
 import { createAlert } from "./alertAction";
 import userInfoModel from "../models/userInfoModels";
@@ -90,6 +91,59 @@ export const loginWithGoogle =
         })
       );
       dispatch(userLogin(data));
+    } catch (error: any) {
+      dispatch(userRequestFinish());
+      dispatch(createAlert(error.response.data.message));
+    }
+  };
+
+// export const getUserDetails = () => async (dispatch: any, getState: any) => {
+//   try {
+//     dispatch(userRequestStart());
+
+//     const token = getState().user.token;
+
+//     const config = {
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//     };
+
+//     const { data } = await axios.get("/api/users/profile", config);
+
+//     dispatch(userLogin(data));
+//   } catch (error: any) {
+//     dispatch(userRequestFinish());
+//     dispatch(createAlert(error.response.data.message));
+//   }
+// };
+
+export const popupAccount =
+  (amountInput: number) => async (dispatch: any, getState: any) => {
+    try {
+      dispatch(userRequestStart());
+
+      const token = getState().user.token;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const body = {
+        amount: amountInput,
+      };
+
+      const { data } = await axios.post("/api/users/transaction", body, config);
+
+      console.log(data);
+
+      const userBankAccount = data.bankAccount;
+
+      dispatch(userPopupAccount(userBankAccount));
     } catch (error: any) {
       dispatch(userRequestFinish());
       dispatch(createAlert(error.response.data.message));

@@ -28,6 +28,12 @@ const userSchema = new mongoose.Schema({
   },
   gameHistory: [gameSchema],
   avatar: String,
+  transaction: [
+    {
+      amount: { type: Number, required: true, min: 10 },
+      paidAt: Date,
+    },
+  ],
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {

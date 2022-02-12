@@ -56,6 +56,11 @@ const Navbar = () => {
     navigate("/profile");
   };
 
+  const transitionHandler = () => {
+    setAnchorElUser(null);
+    navigate("/transaction");
+  };
+
   const stringAvatar = (name: string) => {
     return {
       sx: {
@@ -197,7 +202,7 @@ const Navbar = () => {
                 <MenuItem onClick={profileHandler}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseUserMenu}>
+                <MenuItem onClick={transitionHandler}>
                   <Typography textAlign="center">Transaction</Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseUserMenu}>
