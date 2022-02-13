@@ -10,6 +10,12 @@ import { createAlert } from "./alertAction";
 import userInfoModel from "../models/userInfoModels";
 import axios from "axios";
 
+enum severity {
+  error = "error",
+  success = "success",
+  warning = "warning",
+}
+
 export const signUp =
   (name: string, email: string, password: string) => async (dispatch: any) => {
     try {
@@ -152,6 +158,12 @@ export const popupAccount =
           isAdmin: user.isAdmin,
           bankAccount: updateBankAccount,
         })
+      );
+      dispatch(
+        createAlert(
+          "Your Account has been successfuly popup!",
+          severity.success
+        )
       );
     } catch (error: any) {
       dispatch(userRequestFinish());

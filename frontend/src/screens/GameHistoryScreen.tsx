@@ -8,7 +8,6 @@ import { Box } from "@mui/material";
 
 const GameHistoryScreen = () => {
   const dispatch = useDispatch();
-  const { isLogin, userInfo } = useSelector((state: RootState) => state.user);
   const { lotteryHistory, loading } = useSelector(
     (state: RootState) => state.lottery
   );

@@ -30,14 +30,27 @@ const submitLottery = asyncHandler(async (req, res) => {
       lotteryCost: totalLotteryCost,
     };
 
+    const updatedBankAccount =
+      user.bankAccount - totalLotteryCost + totalProfit;
+
     if (user) {
       user.gameHistory.push(gameSummary);
-      user.bankAccount = user.bankAccount - totalLotteryCost + totalProfit;
+      user.bankAccount = updatedBankAccount;
+    }
+
+    if (updatedBankAccount < 0) {
+      res.status(401);
+      throw new Error(
+        "Not enough money to play. Please popup for Bank Account"
+      );
     }
 
     const updatedUser = await user.save();
 
-    res.json(updatedUser);
+    res.json({
+      bankAccount: updatedUser.bankAccount,
+      gameHistory: updatedUser.gameHistory.slice(-1),
+    });
   }
 
   if (!playLottery) {
@@ -60,4 +73,5 @@ const getLotteryHistory = asyncHandler(async (req, res) => {
   const gameHistory = user.gameHistory;
   res.json(gameHistory);
 });
+
 export { submitLottery, getLotteryHistory };

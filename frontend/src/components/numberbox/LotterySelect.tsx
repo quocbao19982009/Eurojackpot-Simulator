@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import NumberBox from "./NumberBox";
 import StarNumberBox from "./StarNumberBox";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import ShuffleOnIcon from "@mui/icons-material/ShuffleOn";
 import { useDispatch, useSelector } from "react-redux";
 import lotteryModel from "../../models/lotteryModels";
 import { addLotteryTicket } from "../../actions/lotteryAction";
 import { v4 as uuidv4 } from "uuid";
-import classes from "./LotterySelect.module.css";
+
 import generateLottery from "../../ultis/generateLottery";
 import { RootState } from "../../store/store";
 import { deepPurple } from "@mui/material/colors";
 
-const LotterySelect = () => {
+interface LotterySelectProps {
+  payHandler: () => void;
+}
+
+const LotterySelect = ({ payHandler }: LotterySelectProps) => {
   const [lotteryNumber, setLotteryNumber] = useState<number[]>([]);
   const [maxNumber, setMaxNumber] = useState<boolean>(false);
 
@@ -58,7 +62,7 @@ const LotterySelect = () => {
   };
 
   return (
-    <div className={classes.container}>
+    <Box padding="2rem">
       <form onSubmit={sumbitHandler}>
         <NumberBox
           lotteryNumber={lotteryNumber}
@@ -74,45 +78,50 @@ const LotterySelect = () => {
           setMaxStarNumber={setMaxStarNumber}
           maxTickets={maxTickets}
         />
-        <div className={classes.actions}>
-          <div className={classes.randomButton}>
-            <Button
-              onClick={randomTicketHandler}
-              disabled={maxTickets}
-              variant="outlined"
-              type="button"
-              color="secondary"
-            >
-              <ShuffleOnIcon />
-            </Button>
-          </div>
-          <div className={classes.addButton}>
-            <Button
-              variant="contained"
-              type="submit"
-              color="secondary"
-              disabled={!isDisableButton}
-            >
-              Add Ticket
-            </Button>
-          </div>
-        </div>
-        <div className={classes.actions}>
+        <Box
+          sx={{
+            display: "flex",
+            margin: "0 1rem 2rem",
+            justifyContent: "space-between",
+          }}
+        >
           <Button
-            color="success"
-            className={classes.payButton}
-            size="large"
-            variant="contained"
-            disabled={payButtonDisable}
+            onClick={randomTicketHandler}
+            disabled={maxTickets}
+            variant="outlined"
+            type="button"
+            color="secondary"
           >
-            <span>Pay {payAmount}</span>
+            <ShuffleOnIcon />
           </Button>
-        </div>
+
+          <Button
+            variant="contained"
+            type="submit"
+            color="secondary"
+            disabled={!isDisableButton}
+          >
+            Add Ticket
+          </Button>
+        </Box>
       </form>
+
+      <Button
+        color="success"
+        className="payButton"
+        size="large"
+        variant="contained"
+        fullWidth
+        disabled={payButtonDisable}
+        onClick={payHandler}
+      >
+        <span>Pay {payAmount}</span>
+      </Button>
+
       {maxTickets && (
         <p style={{ textAlign: "center" }}>Only 10 tickets per game</p>
       )}
-    </div>
+    </Box>
   );
 };
 

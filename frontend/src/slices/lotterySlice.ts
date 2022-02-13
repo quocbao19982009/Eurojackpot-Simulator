@@ -7,16 +7,6 @@ export interface LotteryState {
   loading: boolean;
 }
 
-/* LotteryInput = [
-  {
-    number : [1,2,3,4,5], 
-    starNumber: [1,2]
-  }, {
-    number : [1,2,3,4,5], 
-    starNumber: [1,2]
-  }
-]
-*/
 const initialState: LotteryState = {
   lotteryInput: [],
   lotteryHistory: [],

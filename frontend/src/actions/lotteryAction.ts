@@ -4,6 +4,7 @@ import {
   lotteryRequestStart,
   lotteryRequestFinish,
 } from "../slices/lotterySlice";
+import { userPopupAccount } from "../slices/userSlice";
 import lotteryModel from "../models/lotteryModels";
 import { createAlert } from "./alertAction";
 import axios from "axios";
@@ -46,6 +47,35 @@ export const getLotteryHistory = () => async (dispatch: any, getState: any) => {
     const { data } = await axios.get("/api/lottery/history", config);
 
     dispatch(updateLotteryHistory(data));
+  } catch (error: any) {
+    dispatch(lotteryRequestFinish());
+    dispatch(createAlert(error.response.data.message));
+  }
+};
+
+export const playLottery = () => async (dispatch: any, getState: any) => {
+  try {
+    dispatch(lotteryRequestStart());
+
+    const token = getState().user.token;
+    const { lotteryInput } = getState().lottery;
+    const body = {
+      playLottery: lotteryInput,
+    };
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.post("/api/lottery/play", body, config);
+
+    const updateBankAccount = data.bankAccount;
+
+    dispatch(userPopupAccount(updateBankAccount));
+
+    return data.gameHistory[0];
   } catch (error: any) {
     dispatch(lotteryRequestFinish());
     dispatch(createAlert(error.response.data.message));

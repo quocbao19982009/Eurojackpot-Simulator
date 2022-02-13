@@ -5,7 +5,7 @@ import LotterySelect from "../numberbox/LotterySelect";
 const GameArea = () => {
   return (
     <>
-      <h1>Basic Game</h1>
+      {/* <h1>Basic Game</h1>
       <div className={classes.gameArea}>
         <div className={classes.tickets}>
           <LotteryTicketList />
@@ -13,7 +13,7 @@ const GameArea = () => {
         <div className={classes.selection}>
           <LotterySelect />
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

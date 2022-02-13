@@ -1,8 +1,14 @@
 import { setAlert, removeAlert } from "../slices/alertSlice";
 import { v4 as uuidv4 } from "uuid";
 
+enum severity {
+  error = "error",
+  success = "success",
+  warning = "warning",
+}
+
 export const createAlert =
-  (message: string, alertType: string = "danger", timeout: number = 5000) =>
+  (message: string, alertType = severity.error, timeout: number = 5000) =>
   (dispatch: any) => {
     const id = uuidv4();
 

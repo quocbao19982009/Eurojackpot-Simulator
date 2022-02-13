@@ -43,6 +43,7 @@ const LotteryTableRow = ({
           sx={{
             listStyle: "none",
             display: "flex",
+            alignItems: "center",
             flexDirection: "row",
             gap: "1rem",
             alignContent: "flex-end",
@@ -108,6 +109,7 @@ const LotteryTableRow = ({
                       display: "flex",
                       height: "2rem",
                       justifyContent: "center",
+
                       width: "2rem",
                       fontWeight: 500,
                     }
