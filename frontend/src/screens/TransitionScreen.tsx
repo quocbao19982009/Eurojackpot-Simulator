@@ -11,45 +11,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { popupAccount } from "../actions/userAction";
 import TransactionTable from "../components/transactionHistory/TransactionTable";
 import { RootState } from "../store/store";
+import { getPopupHistory } from "../actions/userAction";
 import axios from "axios";
-
-interface popupHistoryInterface {
-  amount: number;
-  paidAt: string;
-  _id: string;
-}
 
 const TransitionScreen = () => {
   const dispatch = useDispatch();
+  const [successPopup, setSuccessPopup] = useState<boolean>(false);
   const [popupAmount, setPopupAmount] = useState<string>("10");
-  const [popupHistory, setPopupHistory] = useState<popupHistoryInterface[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const token = useSelector((state: RootState) => state.user.token);
 
-  const getPopupHistory = async () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    const { data } = await axios.get("/api/users/transaction", config);
-
-    return data;
-  };
+  const { popupHistory, loading } = useSelector(
+    (state: RootState) => state.user
+  );
 
   useEffect(() => {
-    (async () => {
-      const data = await getPopupHistory();
-      setPopupHistory(data);
-      setLoading(false);
-    })();
-  }, [loading]);
+    dispatch(getPopupHistory());
+    setSuccessPopup(false);
+  }, [successPopup]);
 
-  console.log(popupHistory);
-  console.log(loading);
-  console.log(popupAmount);
   return (
     <div>
       <Container
@@ -146,7 +124,7 @@ const TransitionScreen = () => {
                 // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
                 onSuccess={(details: any, data: any) => {
                   dispatch(popupAccount(+popupAmount));
-                  setLoading(true);
+                  setSuccessPopup(true);
                 }}
               />
             </Box>

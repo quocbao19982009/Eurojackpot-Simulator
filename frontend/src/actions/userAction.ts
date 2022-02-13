@@ -4,6 +4,7 @@ import {
   userRequestStart,
   userRequestFinish,
   userPopupAccount,
+  userPopupHistory,
 } from "../slices/userSlice";
 import { createAlert } from "./alertAction";
 import userInfoModel from "../models/userInfoModels";
@@ -157,3 +158,25 @@ export const popupAccount =
       dispatch(createAlert(error.response.data.message));
     }
   };
+
+export const getPopupHistory = () => async (dispatch: any, getState: any) => {
+  try {
+    dispatch(userRequestStart());
+
+    const token = getState().user.token;
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.get("/api/users/transaction", config);
+
+    dispatch(userPopupHistory(data));
+  } catch (error: any) {
+    dispatch(userRequestFinish());
+    dispatch(createAlert(error.response.data.message));
+  }
+};

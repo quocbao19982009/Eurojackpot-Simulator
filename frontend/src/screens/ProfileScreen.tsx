@@ -5,15 +5,28 @@ import { getLotteryHistory } from "../actions/lotteryAction";
 import GameHistory from "../components/gameHistory/GameHistory";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
+import { getPopupHistory } from "../actions/userAction";
 const ProfileScreen = () => {
   const dispatch = useDispatch();
-  const { isLogin, userInfo } = useSelector((state: RootState) => state.user);
-  const { lotteryHistory, loading } = useSelector(
+  const {
+    isLogin,
+    userInfo,
+    popupHistory,
+    loading: loadingUser,
+  } = useSelector((state: RootState) => state.user);
+  const { lotteryHistory, loading: loadingLottery } = useSelector(
     (state: RootState) => state.lottery
   );
 
-  console.log("loading in history", loading);
+  const totalPopupAmount = popupHistory.reduce((prev, curr) => {
+    return prev + curr.amount;
+  }, 0);
+  const totalWin = lotteryHistory.reduce((prev, curr) => {
+    return prev + curr.win;
+  }, 0);
+
   useEffect(() => {
+    dispatch(getPopupHistory());
     dispatch(getLotteryHistory());
   }, []);
 
@@ -32,11 +45,12 @@ const ProfileScreen = () => {
       <Typography component={"h2"} variant={"h5"}>
         Current Account: {`${userInfo?.bankAccount}.00 € `}
       </Typography>
-      <Box sx={{ marginTop: "1rem" }}>
-        {lotteryHistory.length !== 0 && (
-          <GameHistory lotteryHistory={lotteryHistory} />
-        )}
-      </Box>
+      <Typography component={"h2"} variant={"h5"}>
+        Total Popup: {`${totalPopupAmount}.00 € `}
+      </Typography>
+      <Typography component={"h2"} variant={"h5"}>
+        Total Win: {`${totalWin}.00 € `}
+      </Typography>
     </>
   );
 };

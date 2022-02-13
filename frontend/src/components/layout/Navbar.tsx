@@ -61,6 +61,11 @@ const Navbar = () => {
     navigate("/transaction");
   };
 
+  const gameHistoryHandler = () => {
+    setAnchorElUser(null);
+    navigate("/history");
+  };
+
   const stringAvatar = (name: string) => {
     return {
       sx: {
@@ -205,7 +210,7 @@ const Navbar = () => {
                 <MenuItem onClick={transitionHandler}>
                   <Typography textAlign="center">Transaction</Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseUserMenu}>
+                <MenuItem onClick={gameHistoryHandler}>
                   <Typography textAlign="center">Game History</Typography>
                 </MenuItem>
                 <MenuItem onClick={logoutHandler}>

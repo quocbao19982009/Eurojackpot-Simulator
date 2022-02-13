@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import userInfoModel from "./../models/userInfoModels";
+import popupHistoryModels from "./../models/popupHistory";
 
 interface UserState {
   isLogin: boolean | null;
   userInfo: userInfoModel | null;
   token: string | null;
   loading: boolean;
+  popupHistory: popupHistoryModels[];
 }
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
@@ -23,6 +25,7 @@ const initialState: UserState = {
   userInfo: userInfoFromStorage,
   token: tokenFromStorage,
   loading: false,
+  popupHistory: [],
 };
 
 export const userSlice = createSlice({
@@ -56,6 +59,10 @@ export const userSlice = createSlice({
       state.userInfo!.bankAccount = action.payload;
       state.loading = false;
     },
+    userPopupHistory: (state, action: PayloadAction<popupHistoryModels[]>) => {
+      state.popupHistory = action.payload;
+      state.loading = false;
+    },
   },
 });
 
@@ -65,6 +72,7 @@ export const {
   userRequestStart,
   userRequestFinish,
   userPopupAccount,
+  userPopupHistory,
 } = userSlice.actions;
 
 export default userSlice.reducer;
