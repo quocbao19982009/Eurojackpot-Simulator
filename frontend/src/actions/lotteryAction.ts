@@ -3,18 +3,20 @@ import {
   updateLotteryHistory,
   lotteryRequestStart,
   lotteryRequestFinish,
+  resetLotteryTickets,
 } from "../slices/lotterySlice";
 import { userPopupAccount } from "../slices/userSlice";
 import lotteryModel from "../models/lotteryModels";
 import { createAlert } from "./alertAction";
+
 import axios from "axios";
 
 export const addLotteryTicket =
   (lotteryTicket: lotteryModel) => (dispatch: any, getState: any) => {
     const currentLotteryTickets: lotteryModel[] =
       getState().lottery.lotteryInput;
+
     const updatedLotteryTickets = [...currentLotteryTickets, lotteryTicket];
-    console.log(getState().lottery.lotteryInput);
 
     dispatch(updateLotteryTickets(updatedLotteryTickets));
   };
@@ -74,7 +76,7 @@ export const playLottery = () => async (dispatch: any, getState: any) => {
     const updateBankAccount = data.bankAccount;
 
     dispatch(userPopupAccount(updateBankAccount));
-
+    dispatch(resetLotteryTickets());
     return data.gameHistory[0];
   } catch (error: any) {
     dispatch(lotteryRequestFinish());

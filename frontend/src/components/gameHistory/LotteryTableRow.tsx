@@ -5,7 +5,6 @@ import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import compareLottery from "../../ultis/compareLottery";
-import { number } from "yup";
 
 interface LotteryTableRowProps {
   index: number;

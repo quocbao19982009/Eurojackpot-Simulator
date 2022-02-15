@@ -1,30 +1,23 @@
 import React, { useState } from "react";
-import Container from "../components/layout/Container";
-import GameArea from "../components/gameArea/GameArea";
-import LotteryTicketList from "../components/gameArea/LotteryTicketList";
-import LotterySelect from "../components/numberbox/LotterySelect";
-import { Box } from "@mui/system";
+
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
-import { playLottery } from "../actions/lotteryAction";
-import GameResult from "../components/GameResult";
-import { boolean } from "yup/lib/locale";
-import lotteryGameModel from "../models/lotteryGameModels";
-import {
-  Backdrop,
-  Dialog,
-  DialogContent,
-  Modal,
-  DialogTitle,
-  Button,
-  CircularProgress,
-  IconButton,
-} from "@mui/material";
-import GameDetails from "../components/gameHistory/GameDetails";
 
+import { DialogContent, Modal, Button, CircularProgress } from "@mui/material";
+import { Box } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
+
+import { useNavigate } from "react-router-dom";
+
+import { playLottery } from "../actions/lotteryAction";
+import lotteryGameModel from "../models/lotteryGameModels";
+import GameDetails from "../components/gameHistory/GameDetails";
+import LotteryTicketList from "../components/gameArea/LotteryTicketList";
+import LotterySelect from "../components/numberbox/LotterySelect";
+
 const GameScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
   const [gameResult, setGameResult] = useState<lotteryGameModel | null>(null);
 
@@ -32,15 +25,14 @@ const GameScreen = () => {
     setOpen(false);
   };
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const lotteryInput = useSelector(
-    (state: RootState) => state.lottery.lotteryInput
-  );
+  const { isLogin } = useSelector((state: RootState) => state.user);
 
   const payHandler = async () => {
+    if (!isLogin) {
+      navigate("/signin");
+      return;
+    }
+
     setOpen(true);
     const resultGame: any = await dispatch(playLottery());
     console.log(resultGame);
@@ -54,7 +46,13 @@ const GameScreen = () => {
   return (
     <>
       <h1>Basic Game</h1>
-      <Box sx={{ display: "flex", margin: "0 2rem" }}>
+      <Box
+        sx={{
+          display: "flex",
+          margin: "0 2rem",
+          flexDirection: { xs: "column-reverse", md: "row" },
+        }}
+      >
         <Box sx={{ borderRight: "1px solid #ebeff5", flex: "1 1 auto" }}>
           <LotteryTicketList />
         </Box>

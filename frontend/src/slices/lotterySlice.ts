@@ -20,6 +20,9 @@ export const lotterySlice = createSlice({
     updateLotteryTickets: (state, action: PayloadAction<lotteryModel[]>) => {
       state.lotteryInput = action.payload;
     },
+    resetLotteryTickets: (state) => {
+      state.lotteryInput = [];
+    },
     updateLotteryHistory: (
       state,
       action: PayloadAction<lotteryGameModel[]>
@@ -41,6 +44,7 @@ export const {
   updateLotteryHistory,
   lotteryRequestStart,
   lotteryRequestFinish,
+  resetLotteryTickets,
 } = lotterySlice.actions;
 
 export default lotterySlice.reducer;

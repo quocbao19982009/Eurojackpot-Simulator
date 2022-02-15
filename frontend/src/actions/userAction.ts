@@ -7,7 +7,6 @@ import {
   userPopupHistory,
 } from "../slices/userSlice";
 import { createAlert } from "./alertAction";
-import userInfoModel from "../models/userInfoModels";
 import axios from "axios";
 
 enum severity {
@@ -29,8 +28,6 @@ export const signUp =
       localStorage.setItem("token", JSON.stringify(data.token));
       localStorage.setItem("userInfo", JSON.stringify(data));
 
-      console.log("data", data);
-
       dispatch(userRequestFinish());
       dispatch(userLogin(data));
     } catch (error: any) {
@@ -48,8 +45,6 @@ export const login =
         email,
         password,
       });
-
-      console.log("data", data);
 
       localStorage.setItem("token", JSON.stringify(data.token));
       localStorage.setItem(

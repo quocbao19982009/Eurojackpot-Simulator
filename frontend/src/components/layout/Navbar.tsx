@@ -1,5 +1,7 @@
 import * as React from "react";
+
 import { useNavigate } from "react-router-dom";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,12 +15,13 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
+
 import { RootState } from "../../store/store";
 import { logout } from "../../actions/userAction";
 import { stringToColor } from "../../ultis/stringToColor";
-import { string } from "yup/lib/locale";
-import { flexbox } from "@mui/system";
+import formatMoney from "../../ultis/formatMoney";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -76,14 +79,24 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "#ffec01", color: "#26282b" }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              navigate("/");
+            }}
           >
             Eurojackpot Simulator
           </Typography>
@@ -118,10 +131,34 @@ const Navbar = () => {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Lottery Game</Typography>
+                <Link style={{ textDecoration: "none" }} to="/">
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      color: "#26282b",
+                      display: "block",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Lottery Game
+                  </Button>
+                </Link>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Game Rule</Typography>
+                <Link style={{ textDecoration: "none" }} to="/rule">
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      color: "#26282b",
+                      display: "block",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Game Rule
+                  </Button>
+                </Link>
               </MenuItem>
             </Menu>
           </Box>
@@ -129,7 +166,11 @@ const Navbar = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+              color: "#26282b",
+            }}
           >
             Eurojackpot Simulator
           </Typography>
@@ -137,7 +178,12 @@ const Navbar = () => {
             <Link style={{ textDecoration: "none" }} to="/">
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "#26282b",
+                  display: "block",
+                  fontWeight: 600,
+                }}
               >
                 Lottery Game
               </Button>
@@ -145,7 +191,12 @@ const Navbar = () => {
             <Link style={{ textDecoration: "none" }} to="/rule">
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "#26282b",
+                  display: "block",
+                  fontWeight: 600,
+                }}
               >
                 Game Rule
               </Button>
@@ -154,7 +205,7 @@ const Navbar = () => {
           {!isLogin && (
             <Box sx={{ flexGrow: 0 }}>
               <Link style={{ textDecoration: "none" }} to="/signin">
-                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                <Button sx={{ my: 2, color: "#26282b", display: "block" }}>
                   Sign In
                 </Button>
               </Link>
@@ -180,11 +231,11 @@ const Navbar = () => {
                   <Typography
                     component={"span"}
                     sx={{
-                      color: "white",
+                      color: "#26282b",
                       marginLeft: "0.3rem",
                     }}
                   >
-                    {`${userInfo.bankAccount}.00 € `}
+                    {formatMoney(userInfo!.bankAccount)}
                   </Typography>
                 </Button>
               </Tooltip>

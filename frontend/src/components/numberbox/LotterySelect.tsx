@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import NumberBox from "./NumberBox";
-import StarNumberBox from "./StarNumberBox";
+
 import { Box, Button } from "@mui/material";
 import ShuffleOnIcon from "@mui/icons-material/ShuffleOn";
+
 import { useDispatch, useSelector } from "react-redux";
-import lotteryModel from "../../models/lotteryModels";
-import { addLotteryTicket } from "../../actions/lotteryAction";
+
 import { v4 as uuidv4 } from "uuid";
 
 import generateLottery from "../../ultis/generateLottery";
 import { RootState } from "../../store/store";
-import { deepPurple } from "@mui/material/colors";
+import NumberBox from "./NumberBox";
+import { addLotteryTicket } from "../../actions/lotteryAction";
+import lotteryModel from "../../models/lotteryModels";
+import StarNumberBox from "./StarNumberBox";
 
 interface LotterySelectProps {
   payHandler: () => void;

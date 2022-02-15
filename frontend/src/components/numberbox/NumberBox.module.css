@@ -19,6 +19,7 @@
   width: 100%;
   grid-auto-rows: 2rem;
   grid-template-columns: repeat(10, 2rem);
+  justify-content: center;
 }
 
 .number {

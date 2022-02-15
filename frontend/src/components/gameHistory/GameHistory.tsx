@@ -1,6 +1,7 @@
 import React from "react";
 import lotteryGameModel from "../../models/lotteryGameModels";
 import GameDetails from "./GameDetails";
+
 import Paper from "@mui/material/Paper";
 
 interface GameHistoryProps {
@@ -8,8 +9,6 @@ interface GameHistoryProps {
 }
 
 const GameHistory = ({ lotteryHistory }: GameHistoryProps) => {
-  console.log(lotteryHistory);
-
   return (
     <div>
       <h2>Your Game Hisotry</h2>

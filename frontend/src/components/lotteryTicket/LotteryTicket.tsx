@@ -1,7 +1,7 @@
-import { ClassNames } from "@emotion/react";
 import lotteryModel from "../../models/lotteryModels";
-import Box from "@mui/material/Box";
 
+import Box from "@mui/material/Box";
+import StarIcon from "@mui/icons-material/Star";
 interface LotteryTicketProps {
   ticket: lotteryModel;
 }
@@ -18,6 +18,7 @@ const LotteryTicket = ({ ticket }: LotteryTicketProps) => {
         ":nth-of-type(2n)": {
           backgroundColor: "#f7f9fc",
         },
+        alignItems: "center",
       }}
     >
       <Box sx={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}>
@@ -40,7 +41,7 @@ const LotteryTicket = ({ ticket }: LotteryTicketProps) => {
             {number}
           </Box>
         ))}
-
+        <StarIcon sx={{ color: "rgb(255, 207, 18)", width: "2rem" }} />
         {ticket.starNumber.map((number) => (
           <Box
             key={`${ticket.id}_${number}`}

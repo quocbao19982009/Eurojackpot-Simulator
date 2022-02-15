@@ -6,15 +6,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+
 import lotteryModel from "../../models/lotteryModels";
 import LotteryTableRow from "./LotteryTableRow";
 
-interface LotteryTable {
+interface LotteryTableProps {
   playLottery: lotteryModel[];
   resultLottery: lotteryModel;
 }
 
-const LotteryTable = ({ playLottery, resultLottery }: LotteryTable) => {
+const LotteryTable = ({ playLottery, resultLottery }: LotteryTableProps) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

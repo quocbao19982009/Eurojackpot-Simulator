@@ -1,15 +1,14 @@
 import React from "react";
-import Navbar from "./components/layout/Navbar";
 import GameScreen from "./screens/GameScreen";
 import LoginScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignupScreen";
 import { Routes, Route } from "react-router-dom";
-import Footer from "./components/layout/Footer";
 import Container from "./components/layout/Container";
 import ProfileScreen from "./screens/ProfileScreen";
 import TransitionScreen from "./screens/TransitionScreen";
 import GameHistoryScreen from "./screens/GameHistoryScreen";
 import PrivateRoute from "./components/PrivateRoute";
+import GameRule from "./screens/GameRule";
 
 function App() {
   return (
@@ -42,6 +41,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/rule" element={<GameRule />} />
       </Routes>
     </Container>
   );

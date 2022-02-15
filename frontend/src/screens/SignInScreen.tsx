@@ -1,5 +1,13 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, Link } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { useFormik } from "formik";
+
+import * as yup from "yup";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,12 +17,9 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+
 import GoogleButton from "../components/GoogleButton";
 import { login } from "../actions/userAction";
-import { useDispatch, useSelector } from "react-redux";
-import { useFormik } from "formik";
-import * as yup from "yup";
 import { RootState } from "../store/store";
 
 const LoginScreen = () => {
@@ -46,7 +51,7 @@ const LoginScreen = () => {
     if (userInfo && !loading) {
       navigate("/");
     }
-  }, [userInfo, loading]);
+  }, [userInfo, loading, navigate]);
 
   return (
     <>

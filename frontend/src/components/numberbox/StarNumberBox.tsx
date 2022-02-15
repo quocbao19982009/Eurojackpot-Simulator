@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import classes from "./StarNumberbox.module.css";
 
@@ -50,7 +50,7 @@ const StarNumberBox = ({
     if (maxTickets) {
       setMaxStarNumber(true);
     }
-  }, [starNumber, maxTickets]);
+  }, [starNumber, maxTickets, setMaxStarNumber]);
 
   return (
     <div className={classes.numberBox}>

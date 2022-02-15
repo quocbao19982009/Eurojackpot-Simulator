@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import lotteryModel from "../../models/lotteryModels";
+import React, { useEffect } from "react";
+
 import classes from "./NumberBox.module.css";
 const numberArray50 = Array.from({ length: 50 }, (_, i) => i + 1);
 
@@ -50,7 +50,7 @@ const NumberBox = ({
     if (maxTickets) {
       setMaxNumber(true);
     }
-  }, [lotteryNumber, maxTickets]);
+  }, [lotteryNumber, maxTickets, setMaxNumber]);
 
   return (
     <div className={classes.numberBox}>

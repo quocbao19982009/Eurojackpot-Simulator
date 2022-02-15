@@ -1,10 +1,10 @@
-import React from "react";
 import lotteryModel from "../../models/lotteryModels";
+
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import LotteryTicket from "../lotteryTicket/LotteryTicket";
-interface LotteryTicketItem {
+interface LotteryTicketItemProps {
   ticket: lotteryModel;
   removeTicketHandler: (id: string) => void;
 }
@@ -12,7 +12,7 @@ interface LotteryTicketItem {
 const LotteryTicketItem = ({
   ticket,
   removeTicketHandler,
-}: LotteryTicketItem) => {
+}: LotteryTicketItemProps) => {
   return (
     <Box
       sx={{

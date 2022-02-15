@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
+
 import { RootState } from "../../store/store";
+import { closeAlert } from "../../actions/alertAction";
+
 import { Alert as AlertUI, AlertTitle } from "@mui/material";
 import { Backdrop } from "@mui/material";
-import { closeAlert } from "../../actions/alertAction";
 
 const Alert = () => {
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const Alert = () => {
     } else {
       setOpen(false);
     }
-  });
+  }, [alerts.length]);
 
   return (
     <>
