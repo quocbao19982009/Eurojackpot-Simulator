@@ -33,7 +33,6 @@ const GameScreen = () => {
       return;
     }
 
-    setOpen(true);
     const resultGame: any = await dispatch(playLottery());
     console.log(resultGame);
 
@@ -41,6 +40,11 @@ const GameScreen = () => {
       console.log("running");
       setGameResult(resultGame);
     }
+    if (!resultGame) {
+      setGameResult(null);
+      return;
+    }
+    setOpen(true);
   };
 
   return (

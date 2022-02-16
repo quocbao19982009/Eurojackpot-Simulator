@@ -60,6 +60,7 @@ export const playLottery = () => async (dispatch: any, getState: any) => {
     dispatch(lotteryRequestStart());
 
     const token = getState().user.token;
+    const user = getState().user.userInfo;
     const { lotteryInput } = getState().lottery;
     const body = {
       playLottery: lotteryInput,
@@ -76,6 +77,16 @@ export const playLottery = () => async (dispatch: any, getState: any) => {
     const updateBankAccount = data.bankAccount;
 
     dispatch(userPopupAccount(updateBankAccount));
+
+    localStorage.setItem(
+      "userInfo",
+      JSON.stringify({
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        bankAccount: updateBankAccount,
+      })
+    );
     dispatch(resetLotteryTickets());
     return data.gameHistory[0];
   } catch (error: any) {

@@ -104,7 +104,7 @@ const ProfileScreen = () => {
               </Grid>
               <Grid item md={6} xs={12}>
                 <Typography component={"h2"} variant={"h5"}>
-                  Total played: {popupHistory.length} game(s)
+                  Total played: {lotteryHistory.length} game(s)
                 </Typography>{" "}
               </Grid>
               <Grid item md={6} xs={12}>

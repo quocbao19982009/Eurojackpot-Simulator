@@ -39,6 +39,10 @@ const TransitionScreen = () => {
 
   const { popupHistory } = useSelector((state: RootState) => state.user);
 
+  const sortedPopupHistory = [...popupHistory].sort(function (a, b) {
+    return +new Date(b.paidAt) - +new Date(a.paidAt);
+  });
+
   const popOver = (
     <Popover
       id={id}
@@ -88,7 +92,7 @@ const TransitionScreen = () => {
           Popup your account in a fast and furious way with PayPal transition.
           Use a sandbox Paypal Account{" "}
           <span
-            style={{ color: "blue" }}
+            style={{ color: "blue", cursor: "pointer" }}
             aria-describedby={id}
             onClick={handleClick}
           >
@@ -195,7 +199,7 @@ const TransitionScreen = () => {
             </Typography>
           )}
           {popupHistory.length > 0 && (
-            <TransactionTable popupHistory={popupHistory} />
+            <TransactionTable popupHistory={sortedPopupHistory} />
           )}
         </Box>
       </Container>

@@ -7,6 +7,7 @@ import {
   userPopupHistory,
 } from "../slices/userSlice";
 import { createAlert } from "./alertAction";
+
 import axios from "axios";
 
 enum severity {
@@ -98,28 +99,6 @@ export const loginWithGoogle =
       dispatch(createAlert(error.response.data.message));
     }
   };
-
-// export const getUserDetails = () => async (dispatch: any, getState: any) => {
-//   try {
-//     dispatch(userRequestStart());
-
-//     const token = getState().user.token;
-
-//     const config = {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//     };
-
-//     const { data } = await axios.get("/api/users/profile", config);
-
-//     dispatch(userLogin(data));
-//   } catch (error: any) {
-//     dispatch(userRequestFinish());
-//     dispatch(createAlert(error.response.data.message));
-//   }
-// };
 
 export const popupAccount =
   (amountInput: number) => async (dispatch: any, getState: any) => {

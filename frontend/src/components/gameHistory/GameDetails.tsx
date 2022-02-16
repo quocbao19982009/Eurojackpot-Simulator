@@ -14,8 +14,6 @@ interface GameDetailsProps {
 }
 
 const GameDetails = ({ lotteryGame }: GameDetailsProps) => {
-  console.log("lotteryGame", lotteryGame);
-
   return (
     <Accordion>
       <AccordionSummary
