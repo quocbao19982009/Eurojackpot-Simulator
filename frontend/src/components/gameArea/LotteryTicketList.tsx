@@ -17,7 +17,7 @@ const LotteryTicketList = () => {
   };
 
   return (
-    <Box sx={{ padding: "2rem" }}>
+    <Box sx={{ padding: "2rem 2rem 2rem 0" }}>
       <Box
         sx={{
           fontWeight: 700,

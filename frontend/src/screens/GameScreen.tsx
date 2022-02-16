@@ -34,10 +34,8 @@ const GameScreen = () => {
     }
 
     const resultGame: any = await dispatch(playLottery());
-    console.log(resultGame);
 
     if (resultGame) {
-      console.log("running");
       setGameResult(resultGame);
     }
     if (!resultGame) {

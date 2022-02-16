@@ -9,6 +9,7 @@ import TransitionScreen from "./screens/TransitionScreen";
 import GameHistoryScreen from "./screens/GameHistoryScreen";
 import PrivateRoute from "./components/PrivateRoute";
 import GameRule from "./screens/GameRule";
+import NotFoundScreen from "./screens/NotFoundScreen";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           }
         />
         <Route path="/rule" element={<GameRule />} />
+        <Route path="*" element={<NotFoundScreen />} />
       </Routes>
     </Container>
   );

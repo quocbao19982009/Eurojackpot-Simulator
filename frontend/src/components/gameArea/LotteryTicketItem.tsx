@@ -19,7 +19,6 @@ const LotteryTicketItem = ({
         display: "flex",
         fontWeight: 600,
         justifyContent: "space-between",
-        padding: "0.25rem 1rem",
         borderRadius: "0.5rem",
         ":nth-of-type(2n)": {
           backgroundColor: "#f7f9fc",
