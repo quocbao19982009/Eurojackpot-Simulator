@@ -88,6 +88,7 @@ export const playLottery = () => async (dispatch: any, getState: any) => {
       })
     );
     dispatch(resetLotteryTickets());
+    dispatch(lotteryRequestFinish());
     return data.gameHistory[0];
   } catch (error: any) {
     dispatch(lotteryRequestFinish());

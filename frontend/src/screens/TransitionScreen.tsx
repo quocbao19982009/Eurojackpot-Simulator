@@ -57,7 +57,7 @@ const TransitionScreen = () => {
       <Typography sx={{ p: 2 }}>
         Email: sb-kpxgl13820173@personal.example.com{" "}
       </Typography>
-      <Typography sx={{ p: 2 }}>Password: BaoNguyenDev98 </Typography>
+      <Typography sx={{ p: 2 }}>Password: Eurojackpot123 </Typography>
     </Popover>
   );
 
@@ -89,7 +89,7 @@ const TransitionScreen = () => {
           color="text.secondary"
           component="p"
         >
-          Popup your account in a fast and furious way with PayPal transition.
+          Topup your account in a fast and furious way with PayPal transition.
           Use a sandbox Paypal Account{" "}
           <span
             style={{ color: "blue", cursor: "pointer" }}
@@ -125,7 +125,7 @@ const TransitionScreen = () => {
         >
           <FormControl>
             <FormLabel id="demo-radio-buttons-group-label">
-              Amount Popup
+              Amount Topup
             </FormLabel>
             <RadioGroup
               aria-labelledby="Popup Amount"
@@ -191,7 +191,7 @@ const TransitionScreen = () => {
             gutterBottom
             textAlign="center"
           >
-            Popup History
+            Topup History
           </Typography>
           {popupHistory.length === 0 && (
             <Typography variant="h4" component={"h4"} textAlign="center">

@@ -131,6 +131,7 @@ export const popupAccount =
           email: user.email,
           isAdmin: user.isAdmin,
           bankAccount: updateBankAccount,
+          avatar: user.avatar ? user.avatar : null,
         })
       );
       dispatch(

@@ -3,7 +3,14 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
 
-import { DialogContent, Modal, Button, CircularProgress } from "@mui/material";
+import {
+  DialogContent,
+  Modal,
+  Button,
+  CircularProgress,
+  Typography,
+  Dialog,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -21,11 +28,15 @@ const GameScreen = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [gameResult, setGameResult] = useState<lotteryGameModel | null>(null);
 
+  const screenWidth = window.innerWidth;
+  console.log(screenWidth);
+
   const handleClose = () => {
     setOpen(false);
   };
 
   const { isLogin } = useSelector((state: RootState) => state.user);
+  const { loading } = useSelector((state: RootState) => state.lottery);
 
   const payHandler = async () => {
     if (!isLogin) {
@@ -37,12 +48,12 @@ const GameScreen = () => {
 
     if (resultGame) {
       setGameResult(resultGame);
+      setOpen(true);
     }
     if (!resultGame) {
       setGameResult(null);
       return;
     }
-    setOpen(true);
   };
 
   return (
@@ -63,32 +74,39 @@ const GameScreen = () => {
         </Box>
       </Box>
 
-      <Modal
-        open={open}
+      <Box sx={{ display: { xs: "block", md: "none" } }}>
+        <Typography component={"h3"} variant={"h5"}>
+          Game Result
+        </Typography>
+        {loading && (
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            {" "}
+            <CircularProgress />{" "}
+          </Box>
+        )}
+        {!loading && gameResult && <GameDetails lotteryGame={gameResult!} />}
+      </Box>
+
+      <Dialog
+        open={screenWidth > 900 && open}
         onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+        aria-labelledby="result modal"
+        aria-describedby="result modal"
+        sx={{
+          display: { xs: "none", md: "flex" },
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        fullWidth={true}
+        maxWidth="xl"
       >
-        <DialogContent
-          sx={{
-            zIndex: 999,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            gap: "1rem",
-          }}
-        >
-          {!gameResult && <CircularProgress />}
-          {gameResult && <GameDetails lotteryGame={gameResult!} />}
-          {
-            <Button variant="contained" onClick={handleClose}>
-              <CloseIcon />
-            </Button>
-          }
-        </DialogContent>
-      </Modal>
+        {!gameResult && <CircularProgress />}
+        {gameResult && <GameDetails lotteryGame={gameResult!} />}
+
+        <Button variant="contained" onClick={handleClose}>
+          <CloseIcon />
+        </Button>
+      </Dialog>
     </>
   );
 };

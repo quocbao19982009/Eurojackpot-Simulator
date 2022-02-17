@@ -34,7 +34,7 @@ const LotterySelect = ({ payHandler }: LotterySelectProps) => {
   const payAmount = `${lotteryTicket.length * 2}.00 €`;
   const payButtonDisable = lotteryTicket.length === 0 ? true : false;
 
-  const maxTickets = lotteryTicket.length === 10 ? true : false;
+  const maxTickets = lotteryTicket.length === 5 ? true : false;
 
   const isDisableButton = maxNumber && maxStarNumber && !maxTickets;
 
@@ -121,7 +121,7 @@ const LotterySelect = ({ payHandler }: LotterySelectProps) => {
       </Button>
 
       {maxTickets && (
-        <p style={{ textAlign: "center" }}>Only 10 tickets per game</p>
+        <p style={{ textAlign: "center" }}>Only 5 tickets per game</p>
       )}
     </Box>
   );

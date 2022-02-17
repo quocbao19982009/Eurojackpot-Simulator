@@ -49,10 +49,10 @@ const GameHistory = ({ lotteryHistory }: GameHistoryProps) => {
       >
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
+            <InputLabel id="sortBy">Sort By</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              labelId="sortBySelect"
+              id="sortBySelect"
               value={sortBy}
               label="Sort By"
               onChange={handleChange}
