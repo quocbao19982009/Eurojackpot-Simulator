@@ -6,9 +6,9 @@ import Link from "@mui/material/Link";
 const Copyright = () => {
   return (
     <Typography variant="body2" color="text.secondary">
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Eurojackpot Simulator
+      {"Made By "}
+      <Link color="inherit" href="https://github.com/quocbao19982009">
+        Bao Nguyen
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -24,13 +24,17 @@ const Footer = () => {
         py: 3,
         px: 2,
         mt: "auto",
+
         backgroundColor: (theme) =>
           theme.palette.mode === "light"
             ? theme.palette.grey[200]
             : theme.palette.grey[800],
       }}
     >
-      <Container maxWidth="sm">
+      <Container
+        sx={{ display: "flex", justifyContent: "center" }}
+        maxWidth="sm"
+      >
         <Copyright />
       </Container>
     </Box>
