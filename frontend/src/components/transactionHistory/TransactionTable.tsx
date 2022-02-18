@@ -17,7 +17,7 @@ interface TransactionTableProps {
 
 const TransactionTable = ({ popupHistory }: TransactionTableProps) => {
   return (
-    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <Table sx={{}} aria-label="simple table">
       <TableHead>
         <TableRow>
           <TableCell align="center">{"Amount (Euros)"} </TableCell>

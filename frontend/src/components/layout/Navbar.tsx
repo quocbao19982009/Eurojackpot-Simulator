@@ -225,7 +225,7 @@ const Navbar = () => {
                 >
                   <Avatar
                     alt={userInfo.name}
-                    src={userInfo.avatar ? userInfo.avatar : ""}
+                    src={userInfo?.avatar ? userInfo?.avatar : ""}
                     {...stringAvatar(isLogin && userInfo.name)}
                   />
                   <Typography

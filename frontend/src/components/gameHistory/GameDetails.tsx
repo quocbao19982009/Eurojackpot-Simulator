@@ -18,8 +18,8 @@ const GameDetails = ({ lotteryGame }: GameDetailsProps) => {
     <Accordion>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
+        aria-controls="game-accordion"
+        id="game-accordion"
       >
         <Box
           sx={{
