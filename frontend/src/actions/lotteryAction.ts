@@ -85,6 +85,7 @@ export const playLottery = () => async (dispatch: any, getState: any) => {
         email: user.email,
         isAdmin: user.isAdmin,
         bankAccount: updateBankAccount,
+        avatar: user.avatar ? user.avatar : "",
       })
     );
     dispatch(resetLotteryTickets());
