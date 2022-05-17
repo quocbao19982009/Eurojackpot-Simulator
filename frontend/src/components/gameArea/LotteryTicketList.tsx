@@ -35,7 +35,7 @@ const LotteryTicketList = () => {
         />
       ))}
       {lotteryTicket.length === 0 && (
-        <Typography>Please add a lottery ticket</Typography>
+        <Typography>Please add a lottery ticket.</Typography>
       )}
     </Box>
   );
