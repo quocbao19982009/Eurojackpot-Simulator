@@ -4,6 +4,8 @@ import Alert from "./Alert";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import Header from "./Header";
+import { BorderAll, RoundedCorner } from "@mui/icons-material";
+import { borderRadius } from "@mui/system";
 
 interface ContainerProps {
   children: JSX.Element | JSX.Element[];
@@ -18,7 +20,7 @@ const Container = ({ children }: ContainerProps) => {
         <Navbar />
         <Header />
         <ContainerUI component="main" sx={{ mt: "2rem", marginBottom: "2rem" }}>
-          <Paper elevation={1} sx={{ padding: "2rem" }}>
+          <Paper elevation={4} sx={{ padding: "2rem" }}>
             <Alert />
             {children}
           </Paper>

@@ -71,6 +71,40 @@ export const logout = () => (dispatch: any) => {
   dispatch(userLogout());
 };
 
+export const getUserInfo = (token: string) => async (dispatch: any) => {
+  try {
+    dispatch(userRequestStart());
+
+    const { data } = await axios.get("/api/users/profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(data.message);
+
+    localStorage.setItem(
+      "userInfo",
+      JSON.stringify({
+        name: data.name,
+        email: data.email,
+        isAdmin: data.isAdmin,
+        bankAccount: data.bankAccount,
+      })
+    );
+
+    dispatch(userRequestFinish());
+    dispatch(userLogin({ ...data, token }));
+  } catch (error: any) {
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("token");
+    dispatch(userLogout());
+    dispatch(userRequestFinish());
+    dispatch(
+      createAlert(`${error.response.data.message}. Please try to login again`)
+    );
+  }
+};
+
 export const loginWithGoogle =
   (email: string, name: string, googleID: string, avatar: string) =>
   async (dispatch: any) => {

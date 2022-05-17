@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GameScreen from "./screens/GameScreen";
 import LoginScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignupScreen";
@@ -10,12 +10,28 @@ import GameHistoryScreen from "./screens/GameHistoryScreen";
 import PrivateRoute from "./components/PrivateRoute";
 import GameRule from "./screens/GameRule";
 import NotFoundScreen from "./screens/NotFoundScreen";
+import { useDispatch } from "react-redux";
+import { getUserInfo } from "./actions/userAction";
+import HomeScreen from "./screens/HomeScreen";
 
 function App() {
+  const dispatch = useDispatch();
+
+  const tokenFromStorage = localStorage.getItem("token")
+    ? JSON.parse(localStorage.getItem("token")!)
+    : null;
+
+  useEffect(() => {
+    if (tokenFromStorage) {
+      dispatch(getUserInfo(tokenFromStorage));
+    }
+  }, [tokenFromStorage]);
+
   return (
     <Container>
       <Routes>
         <Route path="/" element={<GameScreen />} />
+        <Route path="/home" element={<HomeScreen />} />
         <Route path="/signin" element={<LoginScreen />} />
         <Route path="/signup" element={<SignUpScreen />} />
         <Route

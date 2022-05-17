@@ -5,7 +5,7 @@ import { RootState } from "../../store/store";
 import LotteryTicketItem from "./LotteryTicketItem";
 import { removeLotteryTicket } from "../../actions/lotteryAction";
 
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 const LotteryTicketList = () => {
   const lotteryTicket = useSelector(
     (state: RootState) => state.lottery.lotteryInput
@@ -34,6 +34,9 @@ const LotteryTicketList = () => {
           removeTicketHandler={removeTicketHandler}
         />
       ))}
+      {lotteryTicket.length === 0 && (
+        <Typography>Please add a lottery ticket</Typography>
+      )}
     </Box>
   );
 };

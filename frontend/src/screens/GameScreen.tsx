@@ -29,7 +29,6 @@ const GameScreen = () => {
   const [gameResult, setGameResult] = useState<lotteryGameModel | null>(null);
 
   const screenWidth = window.innerWidth;
-  console.log(screenWidth);
 
   const handleClose = () => {
     setOpen(false);
@@ -66,7 +65,7 @@ const GameScreen = () => {
           flexDirection: { xs: "column-reverse", md: "row" },
         }}
       >
-        <Box sx={{ borderRight: "1px solid #ebeff5", flex: "1 1 auto" }}>
+        <Box sx={{ borderRight: "1px solid #ebeff5f2", flex: "1 1 auto" }}>
           <LotteryTicketList />
         </Box>
         <Box>

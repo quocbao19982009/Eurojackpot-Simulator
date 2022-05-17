@@ -95,7 +95,7 @@ const Navbar = () => {
               cursor: "pointer",
             }}
             onClick={() => {
-              navigate("/");
+              navigate("/home");
             }}
           >
             Eurojackpot Simulator
