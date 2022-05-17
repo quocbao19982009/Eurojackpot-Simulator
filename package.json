@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node backendTS/dist/server",
     "server": "nodemon backendTS/src/server.ts",
-    "build": "tsc -p ./backendTS ",
+    "build-server": "tsc -p ./backendTS ",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backendTS/dist/seeder",
