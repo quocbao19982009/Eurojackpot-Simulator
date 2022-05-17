@@ -13,9 +13,9 @@ const app = express();
 
 connectDB();
 
-// if (process.env.NODE_ENV === "development") {
-//   app.use(morgan("dev"));
-// }
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 app.use(express.json());
 
@@ -24,6 +24,8 @@ app.use("/api/users", userRoutes);
 
 // Lottery Routes
 app.use("/api/lottery", lotteryRoutes);
+
+console.log(__dirname);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/build")));
