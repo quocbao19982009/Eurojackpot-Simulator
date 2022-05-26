@@ -10,6 +10,14 @@ The idea behind the project is to give people a realistic view of investing mone
 
 Demo: https://eurojackpot-simulator.herokuapp.com/
 
+## Starting the Project
+
+1. Create a `.env` file in the root directory and copy the content from `.env.example`
+2. You can use your own mongoDB locally or use MongoDB from Docker. Make sure that your mongoDB is running, if you want to use MongoDB from docker. Start up mongoDB Docker by using `docker compose up`
+3. Install dependencies in the root folder: `npm i`
+4. Install dependencies in the frontend folder: `cd frontend` `npm i`
+5. Use this command for development mode: `npm run dev`
+
 ## Technologies
 
 ### Frontend:

@@ -3,12 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const lotterySchema = new mongoose_1.default.Schema({
+var mongoose_1 = __importDefault(require("mongoose"));
+var lotterySchema = new mongoose_1.default.Schema({
     number: [Number],
     starNumber: [Number],
 });
-const gameSchema = new mongoose_1.default.Schema({
+var gameSchema = new mongoose_1.default.Schema({
     playLottery: [lotterySchema],
     resultLottery: lotterySchema,
     win: Number,

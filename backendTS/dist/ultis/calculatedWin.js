@@ -19,14 +19,14 @@ numberSelectedResult
 }
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-const compareLotteryTicket = (arr1, arr2) => {
-    return arr1.filter((item) => arr2.includes(item));
+var compareLotteryTicket = function (arr1, arr2) {
+    return arr1.filter(function (item) { return arr2.includes(item); });
 };
-const calculatedWin = (playerLottery, resultLottery) => {
-    const { number: numberSelectedbyUser, starNumber: starNumberSelectedbyUser } = playerLottery;
-    const { number: numberSelectedResult, starNumber: starNumberSelectedResult } = resultLottery;
-    const winNumber = compareLotteryTicket(numberSelectedbyUser, numberSelectedResult).length;
-    const winStartNumber = compareLotteryTicket(starNumberSelectedbyUser, starNumberSelectedResult).length;
+var calculatedWin = function (playerLottery, resultLottery) {
+    var numberSelectedbyUser = playerLottery.number, starNumberSelectedbyUser = playerLottery.starNumber;
+    var numberSelectedResult = resultLottery.number, starNumberSelectedResult = resultLottery.starNumber;
+    var winNumber = compareLotteryTicket(numberSelectedbyUser, numberSelectedResult).length;
+    var winStartNumber = compareLotteryTicket(starNumberSelectedbyUser, starNumberSelectedResult).length;
     if (winNumber === 2 && winStartNumber === 1) {
         return 8;
     }

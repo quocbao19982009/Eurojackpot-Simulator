@@ -13,6 +13,8 @@ const app = express();
 
 connectDB();
 
+console.log(process.env.MONGO_URI_DEV);
+
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }

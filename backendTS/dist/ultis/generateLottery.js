@@ -1,23 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const generateLottery = () => {
-    let selectedNumber = [];
+var generateLottery = function () {
+    var selectedNumber = [];
     while (selectedNumber.length < 5) {
-        let r = Math.floor(Math.random() * 50) + 1;
+        var r = Math.floor(Math.random() * 50) + 1;
         if (selectedNumber.indexOf(r) === -1) {
             selectedNumber.push(r);
         }
     }
-    let selectedStarNumber = [];
+    var selectedStarNumber = [];
     while (selectedStarNumber.length < 2) {
-        let r = Math.floor(Math.random() * 10) + 1;
+        var r = Math.floor(Math.random() * 10) + 1;
         if (selectedStarNumber.indexOf(r) === -1) {
             selectedStarNumber.push(r);
         }
     }
     return {
-        number: selectedNumber.sort((a, b) => a - b),
-        starNumber: selectedStarNumber.sort((a, b) => a - b),
+        number: selectedNumber.sort(function (a, b) { return a - b; }),
+        starNumber: selectedStarNumber.sort(function (a, b) { return a - b; }),
     };
 };
 exports.default = generateLottery;
