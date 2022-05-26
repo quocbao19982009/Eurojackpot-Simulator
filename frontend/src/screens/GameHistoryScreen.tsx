@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
-
 import { useSelector, useDispatch } from "react-redux";
+import { Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { RootState } from "../store/store";
 import { getLotteryHistory } from "../actions/lotteryAction";
 import GameHistory from "../components/gameHistory/GameHistory";
-
-import { Typography } from "@mui/material";
-import { Box } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const GameHistoryScreen = () => {
   const dispatch = useDispatch();

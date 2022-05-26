@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import {
   updateLotteryTickets,
   updateLotteryHistory,
@@ -8,8 +10,6 @@ import {
 import { userPopupAccount } from "../slices/userSlice";
 import lotteryModel from "../models/lotteryModels";
 import { createAlert } from "./alertAction";
-
-import axios from "axios";
 
 export const addLotteryTicket =
   (lotteryTicket: lotteryModel) => (dispatch: any, getState: any) => {

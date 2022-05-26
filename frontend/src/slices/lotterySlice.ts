@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import lotteryModel from "../models/lotteryModels";
 import lotteryGameModel from "../models/lotteryGameModels";
 export interface LotteryState {

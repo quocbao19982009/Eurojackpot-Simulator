@@ -1,19 +1,9 @@
 import React, { useState } from "react";
-
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
-
-import {
-  DialogContent,
-  Modal,
-  Button,
-  CircularProgress,
-  Typography,
-  Dialog,
-} from "@mui/material";
+import { Button, CircularProgress, Typography, Dialog } from "@mui/material";
 import { Box } from "@mui/system";
 import CloseIcon from "@mui/icons-material/Close";
-
 import { useNavigate } from "react-router-dom";
 
 import { playLottery } from "../actions/lotteryAction";

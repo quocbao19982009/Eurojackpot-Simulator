@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import userInfoModel from "./../models/userInfoModels";
 import popupHistoryModels from "./../models/popupHistory";
 

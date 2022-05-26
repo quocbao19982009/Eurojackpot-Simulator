@@ -1,7 +1,8 @@
 import React from "react";
 import GoogleLogin from "react-google-login";
-import { loginWithGoogle } from "../actions/userAction";
 import { useDispatch } from "react-redux";
+
+import { loginWithGoogle } from "../actions/userAction";
 
 const GoogleButton = () => {
   const dispatch = useDispatch();

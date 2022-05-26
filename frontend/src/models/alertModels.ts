@@ -1,4 +1,4 @@
-enum severity {
+export enum severity {
   error = "error",
   success = "success",
   warning = "warning",

@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-
 import { useSelector, useDispatch } from "react-redux";
-
 import { Typography, Avatar } from "@mui/material";
 import { Box } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";

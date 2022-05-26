@@ -1,9 +1,10 @@
 import React from "react";
-import lotteryModel from "../../models/lotteryModels";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+
+import lotteryModel from "../../models/lotteryModels";
 import compareLottery from "../../ultis/compareLottery";
 
 interface LotteryTableRowProps {

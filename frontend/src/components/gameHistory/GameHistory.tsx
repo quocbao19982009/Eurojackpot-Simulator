@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import lotteryGameModel from "../../models/lotteryGameModels";
-import GameDetails from "./GameDetails";
-
 import Paper from "@mui/material/Paper";
 import {
   FormControl,
@@ -11,6 +8,9 @@ import {
   SelectChangeEvent,
   Box,
 } from "@mui/material";
+
+import lotteryGameModel from "../../models/lotteryGameModels";
+import GameDetails from "./GameDetails";
 
 interface GameHistoryProps {
   lotteryHistory: lotteryGameModel[];

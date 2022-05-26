@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import GameScreen from "./screens/GameScreen";
 import LoginScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignupScreen";
@@ -25,7 +26,7 @@ function App() {
     if (tokenFromStorage) {
       dispatch(getUserInfo(tokenFromStorage));
     }
-  }, [tokenFromStorage]);
+  }, [tokenFromStorage, dispatch]);
 
   return (
     <Container>

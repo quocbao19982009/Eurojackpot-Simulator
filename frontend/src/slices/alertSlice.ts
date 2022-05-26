@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import alertModels from "../models/alertModels";
 
 interface AlertState {

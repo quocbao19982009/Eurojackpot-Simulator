@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Box, Typography } from "@mui/material";
 
 import { RootState } from "../../store/store";
 import LotteryTicketItem from "./LotteryTicketItem";
 import { removeLotteryTicket } from "../../actions/lotteryAction";
 
-import { Box, Typography } from "@mui/material";
 const LotteryTicketList = () => {
   const lotteryTicket = useSelector(
     (state: RootState) => state.lottery.lotteryInput

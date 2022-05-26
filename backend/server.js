@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import morgan from "morgan";
+// import morgan from "morgan";
 import connectDB from "./config/db.js";
 import path from "path";
 import colors from "colors";
@@ -13,9 +13,9 @@ const app = express();
 
 connectDB();
 
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-}
+// if (process.env.NODE_ENV === "development") {
+//   app.use(morgan("dev"));
+// }
 
 app.use(express.json());
 

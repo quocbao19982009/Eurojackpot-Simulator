@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-
 import { Box, Button } from "@mui/material";
 import ShuffleOnIcon from "@mui/icons-material/ShuffleOn";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { v4 as uuidv4 } from "uuid";
 
 import generateLottery from "../../ultis/generateLottery";

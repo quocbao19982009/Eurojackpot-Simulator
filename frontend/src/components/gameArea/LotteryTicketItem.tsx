@@ -1,8 +1,8 @@
-import lotteryModel from "../../models/lotteryModels";
-
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
+
+import lotteryModel from "../../models/lotteryModels";
 import LotteryTicket from "../lotteryTicket/LotteryTicket";
 interface LotteryTicketItemProps {
   ticket: lotteryModel;

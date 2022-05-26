@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import {
   userLogin,
   userLogout,
@@ -7,14 +9,7 @@ import {
   userPopupHistory,
 } from "../slices/userSlice";
 import { createAlert } from "./alertAction";
-
-import axios from "axios";
-
-enum severity {
-  error = "error",
-  success = "success",
-  warning = "warning",
-}
+import { severity } from "../models/alertModels";
 
 export const signUp =
   (name: string, email: string, password: string) => async (dispatch: any) => {

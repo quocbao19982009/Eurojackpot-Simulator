@@ -1,7 +1,7 @@
-import lotteryModel from "../../models/lotteryModels";
-
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
+
+import lotteryModel from "../../models/lotteryModels";
 interface LotteryTicketProps {
   ticket: lotteryModel;
 }

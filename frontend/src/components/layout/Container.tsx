@@ -4,8 +4,6 @@ import Alert from "./Alert";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import Header from "./Header";
-import { BorderAll, RoundedCorner } from "@mui/icons-material";
-import { borderRadius } from "@mui/system";
 
 interface ContainerProps {
   children: JSX.Element | JSX.Element[];
